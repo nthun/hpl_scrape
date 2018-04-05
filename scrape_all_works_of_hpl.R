@@ -25,13 +25,14 @@ hpl_data <-
                             html_nodes(".pagelayout div") %>%
                             # Parse it as text
                             html_text() %>%
-                            # Remove whitespaces in the text.
+                            # Remove redundant whitespaces in the text.
                             str_squish() %>% 
                             # Collapse all text together with linebreak
                             paste(collapse = "\n"))) %>% 
     group_by(title) %>% 
     # Select just one row for each title (because of redundancy)
-    slice(1)
+    slice(1) %>% 
+    ungroup()
 
 
 # Let's save the output, to prevent the lengthy data collection in the future
